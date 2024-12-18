@@ -155,7 +155,11 @@ export async function uploadPreferenceManagementPreferencesInteractive({
     const timestamp =
       metadata.timestampColum === NONE_PREFERENCE_MAP
         ? new Date()
-        : new Date(update[metadata.timestampColum!]);
+        : new Date(
+            new Date(update[metadata.timestampColum!]).getTime(),
+            // / -
+            //   11 * 60 * 60 * 1000, // FIXME
+          );
 
     // Determine updates
     const updates = getPreferenceUpdatesFromRow({
@@ -179,8 +183,9 @@ export async function uploadPreferenceManagementPreferencesInteractive({
       })),
     };
   });
-  await preferenceState.setValue(pendingUpdates, 'pendingUpdates');
-  await preferenceState.setValue({}, 'failingUpdates');
+  // FIXME out of memoru
+  // await preferenceState.setValue(pendingUpdates, 'pendingUpdates');
+  // await preferenceState.setValue({}, 'failingUpdates');
 
   // Exist early if dry run
   if (dryRun) {
@@ -255,7 +260,7 @@ export async function uploadPreferenceManagementPreferencesInteractive({
             error: err?.response?.body || err?.message || 'Unknown error',
           };
         });
-        await preferenceState.setValue(failingUpdates, 'failingUpdates');
+        // await preferenceState.setValue(failingUpdates, 'failingUpdates'); FIXME
       }
 
       total += currentChunk.length;

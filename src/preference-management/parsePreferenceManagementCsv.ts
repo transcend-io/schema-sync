@@ -164,7 +164,7 @@ export async function parsePreferenceManagementCsvWithCache(
 
   // Read in the file
   fileMetadata[file] = currentState;
-  await cache.setValue(fileMetadata, 'fileMetadata');
+  // await cache.setValue(fileMetadata, 'fileMetadata'); FIXME
   const t1 = new Date().getTime();
   logger.info(
     colors.green(
