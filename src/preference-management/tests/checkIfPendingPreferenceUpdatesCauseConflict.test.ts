@@ -75,7 +75,7 @@ const PREFERENCE_TOPICS: PreferenceTopic[] = [
   },
 ];
 
-describe.only('checkIfPendingPreferenceUpdatesCauseConflict', () => {
+describe('checkIfPendingPreferenceUpdatesCauseConflict', () => {
   it('should return false for simple purpose comparison', () => {
     expect(
       checkIfPendingPreferenceUpdatesCauseConflict({

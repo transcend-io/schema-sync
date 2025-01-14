@@ -515,9 +515,9 @@ __metadata:
     "@transcend-io/handlebars-utils": ^1.1.0
     "@transcend-io/internationalization": ^1.6.0
     "@transcend-io/persisted-state": ^1.0.4
-    "@transcend-io/privacy-types": ^4.103.0
+    "@transcend-io/privacy-types": ^4.105.0
     "@transcend-io/secret-value": ^1.2.0
-    "@transcend-io/type-utils": ^1.5.0
+    "@transcend-io/type-utils": ^1.8.0
     "@types/bluebird": ^3.5.38
     "@types/chai": ^4.3.4
     "@types/cli-progress": ^3.11.0
@@ -593,7 +593,6 @@ __metadata:
     tr-pull-consent-metrics: ./build/cli-pull-consent-metrics.js
     tr-pull-consent-preferences: ./build/cli-pull-consent-preferences.js
     tr-pull-datapoints: ./build/cli-pull-datapoints.js
-    tr-pull-ot: ./build/cli-pull-ot.js
     tr-push: ./build/cli-push.js
     tr-request-approve: ./build/cli-request-approve.js
     tr-request-cancel: ./build/cli-request-cancel.js
@@ -607,6 +606,7 @@ __metadata:
     tr-retry-request-data-silos: ./build/cli-retry-request-data-silos.js
     tr-scan-packages: ./build/cli-scan-packages.js
     tr-skip-request-data-silos: ./build/cli-skip-request-data-silos.js
+    tr-sync-ot: ./build/cli-sync-ot.js
     tr-update-consent-manager: ./build/cli-update-consent-manager-to-latest.js
     tr-upload-consent-preferences: ./build/cli-upload-consent-preferences.js
     tr-upload-cookies-from-csv: ./build/cli-upload-cookies-from-csv.js
@@ -647,14 +647,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@transcend-io/privacy-types@npm:^4.103.0":
-  version: 4.103.0
-  resolution: "@transcend-io/privacy-types@npm:4.103.0"
+"@transcend-io/privacy-types@npm:^4.105.0":
+  version: 4.105.0
+  resolution: "@transcend-io/privacy-types@npm:4.105.0"
   dependencies:
     "@transcend-io/type-utils": ^1.0.5
     fp-ts: ^2.16.1
     io-ts: ^2.2.21
-  checksum: 4661368b34b36ae305243ac03dc931822db98b280cfdcb27831be57b67c9c96e09cbe6933139635f6b459d705dc573d36865bc2fb4ae68e59b4e53c39e08ab38
+  checksum: fa0f2af076301aa376446b5bb5e0961b78d86d5ff95f1cc73df9e51f8d7214929fe02ac104a95f23ae6474fb539ffb8ad64a46d7a6d45cdb21e7dcf54decb83f
   languageName: node
   linkType: hard
 
@@ -699,13 +699,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@transcend-io/type-utils@npm:^1.5.0":
-  version: 1.5.0
-  resolution: "@transcend-io/type-utils@npm:1.5.0"
+"@transcend-io/type-utils@npm:^1.8.0":
+  version: 1.8.0
+  resolution: "@transcend-io/type-utils@npm:1.8.0"
   dependencies:
     fp-ts: ^2.16.1
     io-ts: ^2.2.21
-  checksum: 0d7d85e794254069663b277e7728a39fe2d7c6b96eef4e71e6a971cd44f2b1a1be20cb82d708603182ed5b7e9ad20535c845590df59e8302d9ab6f70c626464f
+  checksum: e4a3784e932cbdd9499c3d5d1246a5b2951063a3a8d5ee3be740775b92b7dd10ce1eed21eec85a508e7f98354e0c80a002f89218b541378f9efd1e7fc1b5f155
   languageName: node
   linkType: hard
 

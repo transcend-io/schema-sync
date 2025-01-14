@@ -2073,3 +2073,31 @@ export const PathfinderPromptRunMetadata = t.partial({
 export type PathfinderPromptRunMetadata = t.TypeOf<
   typeof PathfinderPromptRunMetadata
 >;
+
+/** The columns of a row of a OneTrust Assessment form to import into Transcend. */
+const OneTrustAssessmentColumnInput = t.intersection([
+  t.type({
+    /** The title of the column */
+    title: t.string,
+  }),
+  t.partial({
+    /** The optional value of the column */
+    value: t.string,
+  }),
+]);
+
+/** A row with information of the OneTrust assessment form to import into Transcend */
+const OneTrustAssessmentRowInput = t.type({
+  /** A list of columns within this row. */
+  columns: t.array(OneTrustAssessmentColumnInput),
+});
+
+/** Input for importing multiple OneTrust assessment forms into Transcend */
+export const ImportOnetrustAssessmentsInput = t.type({
+  /** 'The rows of the CSV file.' */
+  rows: t.array(OneTrustAssessmentRowInput),
+});
+/** Type override */
+export type ImportOnetrustAssessmentsInput = t.TypeOf<
+  typeof ImportOnetrustAssessmentsInput
+>;

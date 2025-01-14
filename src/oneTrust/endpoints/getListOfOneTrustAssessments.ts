@@ -1,17 +1,19 @@
 import { Got } from 'got';
-import { logger } from '../logger';
+import { logger } from '../../logger';
+import { decodeCodec } from '@transcend-io/type-utils';
 import {
   OneTrustAssessment,
   OneTrustGetListOfAssessmentsResponse,
-} from './types';
+} from '@transcend-io/privacy-types';
 
 /**
  * Fetch a list of all assessments from the OneTrust client.
+ * ref: https://developer.onetrust.com/onetrust/reference/getallassessmentbasicdetailsusingget
  *
  * @param param - the information about the OneTrust client
  * @returns a list of OneTrustAssessment
  */
-export const getListOfAssessments = async ({
+export const getListOfOneTrustAssessments = async ({
   oneTrust,
 }: {
   /** The OneTrust client instance */
@@ -23,15 +25,16 @@ export const getListOfAssessments = async ({
 
   const allAssessments: OneTrustAssessment[] = [];
 
-  logger.info('Getting list of all assessments from OneTrust...');
   while (currentPage < totalPages) {
     // eslint-disable-next-line no-await-in-loop
     const { body } = await oneTrust.get(
       `api/assessment/v2/assessments?page=${currentPage}&size=2000`,
     );
-    const { page, content } = JSON.parse(
+
+    const { page, content } = decodeCodec(
+      OneTrustGetListOfAssessmentsResponse,
       body,
-    ) as OneTrustGetListOfAssessmentsResponse;
+    );
     allAssessments.push(...(content ?? []));
     if (currentPage === 0) {
       totalPages = page?.totalPages ?? 0;

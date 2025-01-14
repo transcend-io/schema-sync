@@ -283,3 +283,16 @@ export const ASSESSMENTS = gql`
     }
   }
 `;
+
+export const IMPORT_ONE_TRUST_ASSESSMENT_FORMS = gql`
+  mutation TranscendCliImportOneTrustAssessmentForms(
+    $input: ImportOnetrustAssessmentsInput!
+  ) {
+    importOneTrustAssessmentForms(input: $input) {
+      assessmentForms {
+        id
+        title
+      }
+    }
+  }
+`;
