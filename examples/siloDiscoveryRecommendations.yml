@@ -1,0 +1,6 @@
+siloDiscoveryRecommendations:
+  - title: Slack
+    resourceId: 0oa677bq1n5OAyODE5d7
+    lastDiscoveredAt: '2025-01-18T00:05:00.378Z'
+    suggestedCatalog: Slack
+    plugin: Okta

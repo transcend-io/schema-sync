@@ -174,7 +174,7 @@ export const EnricherInput = t.intersection([
      */
     'input-identifier': t.string,
     /**
-     * A regular expression that can be used to match on for cancelation
+     * A regular expression that can be used to match on for cancellation
      */
     testRegex: t.string,
     /**
@@ -1744,6 +1744,54 @@ export const AssessmentInput = t.intersection([
 /** Type override */
 export type AssessmentInput = t.TypeOf<typeof AssessmentInput>;
 
+/**
+ * Input to define a silo discovery recommendation
+ *
+ * @see https://docs.transcend.io/docs/silo-discovery
+ */
+export const SiloDiscoveryRecommendationInput = t.intersection([
+  t.type({
+    /** The unique identifier for the resource */
+    resourceId: t.string,
+    /** Timestamp of the plugin run that found this silo recommendation */
+    lastDiscoveredAt: t.string,
+    /** The plugin that found this recommendation */
+    plugin: t.string, // Assuming Plugin is a string, replace with appropriate type if necessary
+    /** The suggested catalog for this recommendation */
+    suggestedCatalog: t.string,
+  }),
+  /**
+   * TODO: Allow for these to be pulled
+   */
+  t.partial({
+    /** The ISO country code for the AWS Region if applicable */
+    country: t.string,
+    /** The ISO country subdivision code for the AWS Region if applicable */
+    countrySubDivision: t.string,
+    /** The plaintext that we will pass into recommendation */
+    plaintextContext: t.string,
+    /** The plugin configurations for the recommendation */
+    pluginConfigurations: t.string, // Assuming DataSiloPluginConfigurations is a string
+    /** The AWS Region for data silo if applicable */
+    region: t.string,
+    /** The custom title of the data silo recommendation */
+    title: t.string,
+    /** The URL for more information about the recommendation */
+    url: t.string,
+    /** The list of tags associated with the recommendation */
+    tags: t.array(t.string),
+    /** The date the recommendation was created */
+    createdAt: t.string,
+    /** The date the recommendation was last updated */
+    updatedAt: t.string,
+  }),
+]);
+
+/** Type override */
+export type SiloDiscoveryRecommendationInput = t.TypeOf<
+  typeof SiloDiscoveryRecommendationInput
+>;
+
 export const TranscendInput = t.partial({
   /**
    * Action items
@@ -1861,6 +1909,10 @@ export const TranscendInput = t.partial({
    * The full list of assessment results
    */
   assessments: t.array(AssessmentInput),
+  /**
+   * The full list of silo discovery recommendations
+   */
+  siloDiscoveryRecommendations: t.array(SiloDiscoveryRecommendationInput),
 });
 
 /** Type override */

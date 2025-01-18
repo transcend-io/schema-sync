@@ -83,3 +83,4 @@ export * from './syncAgentFiles';
 export * from './syncVendors';
 export * from './syncDataCategories';
 export * from './syncProcessingPurposes';
+export * from './fetchAllSiloDiscoveryRecommendations';

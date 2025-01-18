@@ -32,6 +32,7 @@ import {
   AssessmentSectionInput,
   AssessmentSectionQuestionInput,
   RiskLogicInput,
+  SiloDiscoveryRecommendationInput,
 } from '../codecs';
 import {
   RequestAction,
@@ -89,6 +90,7 @@ import {
   parseAssessmentDisplayLogic,
 } from './parseAssessmentDisplayLogic';
 import { parseAssessmentRiskLogic } from './parseAssessmentRiskLogic';
+import { fetchAllSiloDiscoveryRecommendations } from './fetchAllSiloDiscoveryRecommendations';
 
 export const DEFAULT_TRANSCEND_PULL_RESOURCES = [
   TranscendPullResource.DataSilos,
@@ -180,6 +182,7 @@ export async function pullTranscendConfiguration(
     partitions,
     assessments,
     assessmentTemplates,
+    siloDiscoveryRecommendations,
   ] = await Promise.all([
     // Grab all data subjects in the organization
     resources.includes(TranscendPullResource.DataSilos) ||
@@ -327,6 +330,10 @@ export async function pullTranscendConfiguration(
     // Fetch assessmentTemplates
     resources.includes(TranscendPullResource.AssessmentTemplates)
       ? fetchAllAssessmentTemplates(client)
+      : [],
+    // Fetch siloDiscoveryRecommendations
+    resources.includes(TranscendPullResource.SiloDiscoveryRecommendations)
+      ? fetchAllSiloDiscoveryRecommendations(client)
       : [],
   ]);
 
@@ -758,6 +765,30 @@ export async function pullTranscendConfiguration(
               operand: retentionSchedule.operation,
             }
           : undefined,
+      }),
+    );
+  }
+
+  // Save siloDiscoveryRecommendations
+  if (
+    siloDiscoveryRecommendations.length > 0 &&
+    resources.includes(TranscendPullResource.SiloDiscoveryRecommendations)
+  ) {
+    result.siloDiscoveryRecommendations = siloDiscoveryRecommendations.map(
+      ({
+        title,
+        resourceId,
+        lastDiscoveredAt,
+        suggestedCatalog: { title: suggestedCatalogTitle },
+        plugin: {
+          dataSilo: { title: dataSiloTitle },
+        },
+      }): SiloDiscoveryRecommendationInput => ({
+        title,
+        resourceId,
+        lastDiscoveredAt,
+        suggestedCatalog: suggestedCatalogTitle,
+        plugin: dataSiloTitle,
       }),
     );
   }

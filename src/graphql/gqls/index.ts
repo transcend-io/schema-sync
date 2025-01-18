@@ -46,3 +46,4 @@ export * from './vendor';
 export * from './dataCategory';
 export * from './processingPurpose';
 export * from './sombraVersion';
+export * from './siloDiscoveryRecommendation';
